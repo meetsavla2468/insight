@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Insight</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="share">Share</string>
+    <string name="toggle_theme">Toggle Theme</string>
+    <string name="logout">LogOut</string>
+    <string name="only_toggle_theme_would_work">Only Toggle Theme would work</string>
+    <string name="gallery">Gallery</string>
+    <string name="slideshow">Video Lectures</string>
+    <string name="app_developer">App Developer</string>
+    <string name="enter_the_email">Enter The Email</string>
+    <string name="enter_the_password">Enter the Password</string>
+    <string name="click_to_register_page">Click to Register Page</string>
+    <string name="login">Login</string>
+    <string name="login_text">Login</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="spinner_title">Category</string>
+    <string name="upload_content">Upload Content</string>
+    <string name="search_here">Search Here Guys!!!</string>
+    <string name="dsk">Desktop Mode</string>
+    <string name="mbl">Mobile Mode</string>
+    <string name="search_txt">search text</string>
+    <string name="queries">Queries</string>
+    <string name="enter_text">Enter text</string>
+    <string name="_12_10_2020">12-10-2020</string>
+    <string name="send_msg">send msg</string>
+
+</resources>

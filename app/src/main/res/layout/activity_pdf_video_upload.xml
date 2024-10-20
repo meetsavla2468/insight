@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Pdf_Video_Upload">
+
+    <TextView
+        android:id="@+id/upload_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="28dp"
+        android:padding="@dimen/_5mdp"
+        android:text="@string/upload_content"
+        android:textAlignment="center"
+        android:textColor="#1334EA"
+        android:textSize="@dimen/_22mdp"
+        app:layout_constraintBottom_toTopOf="@+id/rdGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/_8mdp"
+        android:layout_marginEnd="@dimen/_8mdp"
+        android:prompt="@string/spinner_title"
+        android:scrollbarSize="@dimen/_15mdp"
+        app:layout_constraintBottom_toTopOf="@id/rdGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/upload_txt" />
+
+    <RadioGroup
+        android:id="@+id/rdGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner">
+
+        <RadioButton
+            android:id="@+id/rdbPDF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#E61B0C"
+            android:layout_marginStart="@dimen/_50mdp"
+            android:padding="10dp"
+            android:text="PDFs" />
+
+        <RadioButton
+            android:id="@+id/rdbVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#E61B0C"
+            android:layout_marginStart="@dimen/_50mdp"
+            android:layout_marginEnd="@dimen/_55mdp"
+            android:padding="10dp"
+            android:text="Videos" />
+
+    </RadioGroup>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/rdGroup"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        >
+
+
+        <EditText
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:hint="Enter Course title"
+            android:inputType="textPersonName|textCapSentences"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textColorHint="#3A3838" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/parent"
+            android:layout_width="400dp"
+            android:layout_height="300dp"
+            android:layout_below="@id/title"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_12mdp">
+        <VideoView
+            android:id="@+id/vw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+      <ImageView
+          android:layout_width="120dp"
+          android:layout_height="120dp"
+          android:id="@+id/pdfView"
+          android:layout_gravity="center_horizontal"
+          android:src="@drawable/baseline_picture_as_pdf_24"
+          android:visibility="gone"
+          />
+          <TextView
+              android:id="@+id/pdfName"
+              android:visibility="gone"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textSize="20sp"
+              android:textColor="@color/black"
+              android:ellipsize="marquee"
+              android:singleLine="true"
+              android:focusable="true"
+              android:textAlignment="center"
+              android:focusableInTouchMode="true"
+              android:scrollHorizontally="true"
+              android:marqueeRepeatLimit="marquee_forever"
+              android:paddingEnd="20dp"
+              android:paddingStart="20dp"
+              />
+        </LinearLayout>
+        <ImageButton
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/openVideo"
+            android:padding="8dp"
+            android:background="@android:color/transparent"
+            android:layout_alignTop="@id/parent"
+            android:layout_alignEnd="@id/parent"
+            android:src="@drawable/baseline_open_in_new_24"
+            app:tint="@color/white" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_uploadBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="10dp"
+            android:visibility="gone"
+            app:cardElevation="10dp">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#288EDF"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/text_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="UPLOAD"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

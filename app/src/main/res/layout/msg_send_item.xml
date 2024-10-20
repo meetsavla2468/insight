@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
+    android:gravity="start"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5mdp"
+        android:background="@drawable/search_bg"
+        android:backgroundTint="#DCFBC6"
+        android:elevation="@dimen/_5mdp"
+        android:minWidth="@dimen/_150mdp"
+        android:maxWidth="@dimen/_260mdp"
+        >
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12mdp"
+            android:layout_marginEnd="@dimen/_12mdp"
+            android:layout_marginTop="@dimen/_5mdp"
+            android:maxLines="1"
+            android:text="My Doubts"
+            android:textColor="@color/purple_500"
+            android:textSize="@dimen/_15font_mdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_1mdp"
+                android:layout_marginTop="@dimen/_6mdp"
+                android:layout_marginEnd="@dimen/_12mdp"
+                android:maxWidth="@dimen/_240mdp"
+                android:padding="@dimen/_5mdp"
+                android:paddingStart="@dimen/_5mdp"
+                android:paddingEnd="@dimen/_5mdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11font_mdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="@dimen/_240mdp"
+                android:layout_height="@dimen/_240mdp"
+                android:layout_marginEnd="@dimen/_12mdp"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/profile_luffy"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/reply_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/_2mdp"
+            android:layout_marginEnd="16dp"
+            android:paddingBottom="@dimen/_4mdp"
+            android:text="@string/_12_10_2020"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_9font_mdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/type" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
