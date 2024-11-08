@@ -334,6 +334,10 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                     case R.id.nav_Menu:
                         draw.openDrawer(GravityCompat.START);
                         return true;
+                    case R.id.nav_Quiz:
+                        intent = new Intent(MainActivity.this, profile.class);
+                        startActivity(intent);
+                        return true;
                 }
                 return false;
             }
@@ -425,7 +429,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 public void run() {
                     speechRecognizer.startListening(speechRecognizerIntent);
                 }
-            }, list.size() * 1000L);
+            }, list.size() * 1000L + 2000);
         }
     }
 

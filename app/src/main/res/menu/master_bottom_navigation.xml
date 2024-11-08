@@ -12,8 +12,12 @@
         android:title="Search" />
 
     <item
+        android:id="@+id/nav_Quiz"
+        android:icon="@drawable/classroom_1"
+        android:title="Quiz" />
+
+    <item
         android:id="@+id/nav_MyProfile"
         android:icon="@drawable/ic_user"
         android:title="User" />
-
 </menu>

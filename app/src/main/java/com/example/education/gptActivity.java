@@ -35,7 +35,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class gptActivity  extends AppCompatActivity {private RecyclerView chatRecyclerView;
+public class gptActivity extends AppCompatActivity {
+    private RecyclerView chatRecyclerView;
     private EditText messageInput;
     private ImageButton sendButton;
     private gptAdapter chatAdapter;
@@ -87,13 +88,18 @@ public class gptActivity  extends AppCompatActivity {private RecyclerView chatRe
         // Make the POST request to the GPT API
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/chat/completions")
-                .addHeader("Authorization", "Bearer sk-vE7DPJx63PJPKTv8-T4o9AH4r-3lrnwtN0HkwNrx63T3BlbkFJ1oRdD7g7Z8lldgqeTjksP89bUo_7dq56iOHUFGhJEA") // Replace with your OpenAI API key
+                .addHeader("Authorization", "Bearer GPT_API_KEY")
                 .addHeader("Content-Type", "application/json")
                 .post(body)
                 .build();
 
         // Execute the API call asynchronously
         client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                e.printStackTrace();
+            }
+
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 try {
@@ -102,11 +108,6 @@ public class gptActivity  extends AppCompatActivity {private RecyclerView chatRe
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                e.printStackTrace();
             }
         });
     }

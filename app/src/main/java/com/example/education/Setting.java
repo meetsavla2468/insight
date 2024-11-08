@@ -65,7 +65,7 @@ public class Setting extends AppCompatActivity {
 
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/chat/completions")
-                .addHeader("Authorization", "Bearer sk-vE7DPJx63PJPKTv8-T4o9AH4r-3lrnwtN0HkwNrx63T3BlbkFJ1oRdD7g7Z8lldgqeTjksP89bUo_7dq56iOHUFGhJEA")
+                .addHeader("Authorization", "Bearer GPT_API_KEY")
                 .addHeader("Content-Type", "application/json")
                 .post(body)
                 .build();
