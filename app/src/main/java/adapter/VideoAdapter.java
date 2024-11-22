@@ -1,49 +1,50 @@
 package adapter;
 
-        import android.content.Context;
-        import android.content.Intent;
-        import android.net.Uri;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ImageView;
-        import android.widget.TextView;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-        import androidx.annotation.NonNull;
-        import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-        import com.example.education.Data;
-        import com.example.education.R;
+import com.example.education.Data;
+import com.example.education.R;
 
-        import java.util.ArrayList;
+import java.util.ArrayList;
 
-        import Model.Course_Model;
+import Model.Course_Model;
 
-public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
+public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> {
 
     private final Context context;
     ArrayList<Data> pdf_list;
 
-    String  course;
-    public VideoAdapter(Context context, ArrayList<Data> pdf_list,String  course) {
+    String course;
+
+    public VideoAdapter(Context context, ArrayList<Data> pdf_list, String course) {
         this.context = context;
         this.pdf_list = pdf_list;
-        this.course=course;
+        this.course = course;
     }
 
     @NonNull
     @Override
     public VideoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.course_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.course_item, parent, false);
         return new VideoAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull VideoAdapter.ViewHolder holder, int position) {
-        Data data=pdf_list.get(position);
+        Data data = pdf_list.get(position);
         if (data != null) {
             holder.tv.setText(data.getTitle());
-            switch (course){
+            switch (course) {
                 case "App Development":
                     holder.img.setImageResource(R.drawable.android_developer);
                     break;
@@ -56,7 +57,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
                 case "Java":
                     holder.img.setImageResource(R.drawable.java_logo);
                     break;
-                case "MATHEMATICS":
+                case "Mathematics":
                     holder.img.setImageResource(R.drawable.ic_pi);
                     break;
                 case "Programming with C":
@@ -88,13 +89,13 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
                 @Override
                 public void onClick(View v) {
 
-                        // Create an intent to play the video
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(Uri.parse(data.getUrl()), "video/*");
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                        // Start the activity to play the video
-                        context.startActivity(intent);
+                    // Create an intent to play the video
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(Uri.parse(data.getUrl()), "video/*");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    // Start the activity to play the video
+                    context.startActivity(intent);
                 }
 
             });
@@ -110,6 +111,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv;
         ImageView img;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv = itemView.findViewById(R.id.text_courses_name);

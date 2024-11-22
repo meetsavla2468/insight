@@ -11,12 +11,12 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/NOTICE.txt'
     }
-    
+
     compileSdk 33
 
     defaultConfig {
         applicationId "com.example.education"
-        minSdk 19
+        minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -80,4 +80,9 @@ dependencies {
 
     implementation 'org.apache.pdfbox:pdfbox:2.0.27'
 
+    implementation 'com.arthenica:mobile-ffmpeg-full:4.4.LTS'
+
+    implementation 'com.tom-roush:pdfbox-android:2.0.27.0'
+
+    implementation 'com.arthenica:mobile-ffmpeg-full:4.4'
 }

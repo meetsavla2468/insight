@@ -23,7 +23,7 @@ import okhttp3.Response;
 public class PdfTextExtractorTask extends AsyncTask<String, Void, String> {
 
     private final Context context;
-    private final pdf.PdfExtractionCallback callback;  // Add callback
+    private final pdf.PdfExtractionCallback callback;
 
     // Constructor to pass context and callback
     public PdfTextExtractorTask(Context context, pdf.PdfExtractionCallback callback) {

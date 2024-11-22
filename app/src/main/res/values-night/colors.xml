@@ -3,5 +3,5 @@
     <!--colors for dark mode-->
     <color name="contentBodyColor">#2A2E43</color>
     <color name="contentTextColor">#fff</color>
-    <color name="bottomNavigationBackground">#878995</color>
+    <color name="bottomNavigationBackground">#000000</color>
 </resources>

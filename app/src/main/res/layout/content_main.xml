@@ -1,42 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/parent.contentLayout"
+    android:background="@drawable/b_g_3"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
-    style="@style/parent.contentLayout">
+    tools:context=".MainActivity">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="20dp"
         tools:layout_editor_absoluteY="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginStart="@dimen/_4mdp"
-            >
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/text_UserName"
-                style="@style/viewParent.headerText"
-                android:text="Hello Friend!"
-                android:layout_marginStart="@dimen/_8mdp"
-                android:padding="5dp"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/appBar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="10dp"
+                card_view:cardBackgroundColor="#FFFFFF"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/text_UserName"
+                    style="@style/viewParent.headerText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:paddingLeft="10dp"
+                    android:text="Hello, Avid Learner!"
+                    android:textColor="#0761F8"
+                    android:textSize="25sp" />
+
+            </androidx.cardview.widget.CardView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -47,7 +63,8 @@
                     style="@style/viewParent.headerText"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:text="Popular Courses" />
+                    android:text="Popular Courses"
+                    android:textColor="#000000" />
 
             </RelativeLayout>
 
@@ -79,7 +96,8 @@
                     style="@style/viewParent.headerText"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:text="Kids Zone" />
+                    android:text="Kids Zone"
+                    android:textColor="#000000" />
 
             </RelativeLayout>
 
@@ -96,12 +114,12 @@
                     android:id="@+id/card1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    card_view:cardElevation="5dp"
-                    card_view:cardCornerRadius="7dp"
-                    card_view:cardUseCompatPadding="true"
+                    android:layout_margin="@dimen/card_margin"
                     card_view:cardBackgroundColor="@color/whiteBodyColor"
+                    card_view:cardCornerRadius="7dp"
+                    card_view:cardElevation="5dp"
                     card_view:cardPreventCornerOverlap="false"
-                    android:layout_margin="@dimen/card_margin">
+                    card_view:cardUseCompatPadding="true">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -125,9 +143,9 @@
                             android:layout_marginEnd="5dp"
                             android:layout_marginBottom="5dp"
                             android:text="Stories"
-                            android:textStyle="bold"
                             android:textColor="@color/kid_zone"
-                            android:textSize="@dimen/frutorial_title" />
+                            android:textSize="@dimen/frutorial_title"
+                            android:textStyle="bold" />
 
                         <!--            <ImageView-->
                         <!--                android:layout_width="wrap_content"-->
@@ -141,16 +159,17 @@
                     </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    card_view:cardElevation="5dp"
-                    card_view:cardCornerRadius="7dp"
-                    card_view:cardUseCompatPadding="true"
+                    android:layout_margin="@dimen/card_margin"
                     card_view:cardBackgroundColor="@color/whiteBodyColor"
+                    card_view:cardCornerRadius="7dp"
+                    card_view:cardElevation="5dp"
                     card_view:cardPreventCornerOverlap="false"
-                    android:layout_margin="@dimen/card_margin">
+                    card_view:cardUseCompatPadding="true">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -174,9 +193,9 @@
                             android:layout_marginEnd="5dp"
                             android:layout_marginBottom="5dp"
                             android:text="KG-UKG"
-                            android:textStyle="bold"
                             android:textColor="@color/kid_zone"
-                            android:textSize="@dimen/frutorial_title" />
+                            android:textSize="@dimen/frutorial_title"
+                            android:textStyle="bold" />
 
                         <!--            <ImageView-->
                         <!--                android:layout_width="wrap_content"-->
@@ -190,95 +209,97 @@
                     </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                android:id="@+id/card3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                card_view:cardElevation="5dp"
-                card_view:cardCornerRadius="7dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:cardBackgroundColor="@color/whiteBodyColor"
-                card_view:cardPreventCornerOverlap="false"
-                android:layout_margin="@dimen/card_margin">
 
-                <RelativeLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_margin="@dimen/card_margin"
+                    card_view:cardBackgroundColor="@color/whiteBodyColor"
+                    card_view:cardCornerRadius="7dp"
+                    card_view:cardElevation="5dp"
+                    card_view:cardPreventCornerOverlap="false"
+                    card_view:cardUseCompatPadding="true">
 
-                    <ImageView
-                        android:id="@+id/youtube3"
-                        android:layout_width="165dp"
-                        android:layout_height="160dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/kid_maths" />
-
-                    <TextView
-                        android:id="@+id/title3"
-                        android:layout_width="110dp"
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/youtube3"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:text="Basic Maths"
-                        android:textStyle="bold"
-                        android:textColor="@color/kid_zone"
-                        android:textSize="@dimen/frutorial_title" />
+                        android:orientation="vertical">
 
-                    <!--            <ImageView-->
-                    <!--                android:layout_width="wrap_content"-->
-                    <!--                android:layout_height="wrap_content"-->
-                    <!--                android:layout_below="@id/youtube"-->
-                    <!--                android:layout_alignParentLeft="true"-->
-                    <!--                android:layout_marginTop="-40dp"-->
-                    <!--                android:src="@android:drawable/ic_media_play" />-->
+                        <ImageView
+                            android:id="@+id/youtube3"
+                            android:layout_width="165dp"
+                            android:layout_height="160dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/kid_maths" />
+
+                        <TextView
+                            android:id="@+id/title3"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/youtube3"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="Basic Maths"
+                            android:textColor="@color/kid_zone"
+                            android:textSize="@dimen/frutorial_title"
+                            android:textStyle="bold" />
+
+                        <!--            <ImageView-->
+                        <!--                android:layout_width="wrap_content"-->
+                        <!--                android:layout_height="wrap_content"-->
+                        <!--                android:layout_below="@id/youtube"-->
+                        <!--                android:layout_alignParentLeft="true"-->
+                        <!--                android:layout_marginTop="-40dp"-->
+                        <!--                android:src="@android:drawable/ic_media_play" />-->
 
 
-                </RelativeLayout>
+                    </RelativeLayout>
 
-            </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
-                android:id="@+id/card4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                card_view:cardElevation="5dp"
-                card_view:cardCornerRadius="7dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:cardBackgroundColor="@color/whiteBodyColor"
-                card_view:cardPreventCornerOverlap="false"
-                android:layout_margin="@dimen/card_margin">
-
-                <RelativeLayout
+                    android:id="@+id/card4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_margin="@dimen/card_margin"
+                    card_view:cardBackgroundColor="@color/whiteBodyColor"
+                    card_view:cardCornerRadius="7dp"
+                    card_view:cardElevation="5dp"
+                    card_view:cardPreventCornerOverlap="false"
+                    card_view:cardUseCompatPadding="true">
 
-                    <ImageView
-                        android:id="@+id/youtube4"
-                        android:layout_width="165dp"
-                        android:layout_height="160dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/cartoon" />
-
-                    <TextView
-                        android:id="@+id/title4"
-                        android:layout_width="110dp"
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/youtube4"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:text="Cartoons"
-                        android:textStyle="bold"
-                        android:textColor="@color/kid_zone"
-                        android:textSize="@dimen/frutorial_title" />
+                        android:orientation="vertical">
 
-                </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/youtube4"
+                            android:layout_width="165dp"
+                            android:layout_height="160dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/cartoon" />
 
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/title4"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/youtube4"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="Cartoons"
+                            android:textColor="@color/kid_zone"
+                            android:textSize="@dimen/frutorial_title"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
             </GridLayout>
 
         </LinearLayout>
@@ -288,11 +309,12 @@
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:alpha="1.0"
+        android:background="#000000"
         android:foreground="?attr/selectableItemBackground"
         app:itemBackground="@color/bottomNavigationBackground"
-        app:itemIconTint="#0B0B0B"
-        app:itemTextColor="#A115E6"
+        app:itemIconTint="#ffffff"
+        app:itemTextColor="#60B1FD"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
