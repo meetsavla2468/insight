@@ -45,7 +45,7 @@ public class gptActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wellness);
+        setContentView(R.layout.activity_gpt); // Assuming activity_chat.xml is your layout
 
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
         messageInput = findViewById(R.id.messageInput);
@@ -56,15 +56,13 @@ public class gptActivity extends AppCompatActivity {
         chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatRecyclerView.setAdapter(chatAdapter);
 
-        sendToGPT("Your task is to return as your response the following sentence exactly word to word :-Hello! I are here to support your mental wellness. Let's chat about anything on your mind and find some peace together.");
-
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String userMessage = messageInput.getText().toString().trim();
                 if (!TextUtils.isEmpty(userMessage)) {
                     // Add the user's message to the chat
-                    messageList.add(new gptMessage_Model(userMessage, true));
+                    messageList.add(new gptMessage_Model(userMessage, true));  // true means user
                     chatAdapter.notifyItemInserted(messageList.size() - 1);
                     chatRecyclerView.scrollToPosition(messageList.size() - 1);
                     messageInput.setText("");
@@ -90,7 +88,7 @@ public class gptActivity extends AppCompatActivity {
         // Make the POST request to the GPT API
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/chat/completions")
-                .addHeader("Authorization", "Bearer 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")
+                .addHeader("Authorization", "Bearer GPT_API_KEY")
                 .addHeader("Content-Type", "application/json")
                 .post(body)
                 .build();

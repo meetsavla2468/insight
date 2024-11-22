@@ -25,21 +25,21 @@ public class FireStore_RV_courses extends RecyclerView.Adapter<FireStore_RV_cour
     Context context;
 
     public FireStore_RV_courses(ArrayList<String> list, Context context) {
-        this.list = list;
-        this.context = context;
+        this.list=list;
+        this.context=context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.course_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.course_item,parent,false);
         return new FireStore_RV_courses.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tv.setText(list.get(holder.getAdapterPosition()));
-        switch (list.get(position)) {
+        switch (list.get(position)){
             case "App Development":
                 holder.img.setImageResource(R.drawable.android_developer);
                 break;
@@ -52,7 +52,7 @@ public class FireStore_RV_courses extends RecyclerView.Adapter<FireStore_RV_cour
             case "Java":
                 holder.img.setImageResource(R.drawable.java_logo);
                 break;
-            case "Mathematics":
+            case "MATHEMATICS":
                 holder.img.setImageResource(R.drawable.ic_pi);
                 break;
             case "Programming with C":
@@ -72,8 +72,8 @@ public class FireStore_RV_courses extends RecyclerView.Adapter<FireStore_RV_cour
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Pdf_Videos.class);
-                intent.putExtra("course", list.get(holder.getAdapterPosition()));
+                Intent intent=new Intent(context, Pdf_Videos.class);
+                intent.putExtra("course",list.get(holder.getAdapterPosition()));
                 context.startActivity(intent);
             }
         });
@@ -83,15 +83,13 @@ public class FireStore_RV_courses extends RecyclerView.Adapter<FireStore_RV_cour
     public int getItemCount() {
         return list.size();
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv;
         ImageView img;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv = itemView.findViewById(R.id.text_courses_name);
-            img = itemView.findViewById(R.id.img_courses);
+            tv= itemView.findViewById(R.id.text_courses_name);
+            img= itemView.findViewById(R.id.img_courses);
         }
     }
 }

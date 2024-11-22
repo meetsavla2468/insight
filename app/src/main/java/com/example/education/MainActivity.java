@@ -335,7 +335,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                         draw.openDrawer(GravityCompat.START);
                         return true;
                     case R.id.nav_Quiz:
-                        intent = new Intent(MainActivity.this, profile.class);
+                        intent = new Intent(MainActivity.this, quiz.class);
                         startActivity(intent);
                         return true;
                 }

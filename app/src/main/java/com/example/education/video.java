@@ -1,6 +1,5 @@
 package com.example.education;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -31,24 +30,22 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.arthenica.mobileffmpeg.FFmpeg;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Queue;
 
 import adapter.VideoAdapter;
+import adapter.pdf_RecyclerAdapter;
 
 public class video extends Fragment {
     TextToSpeech textToSpeech;
     SpeechRecognizer speechRecognizer;
     Intent speechRecognizerIntent;
     FragmentVideoBinding bind;
-    ArrayList<Data> video_list;
+    ArrayList<Data> pdf_list;
+
     VideoAdapter adapter;
     FirebaseAuth auth;
     FirebaseFirestore fireStore;
@@ -68,7 +65,7 @@ public class video extends Fragment {
         assert getArguments() != null;
         course = getArguments().getString("course");
 
-        video_list = new ArrayList<>();
+        pdf_list = new ArrayList<>();
 
         // Initialize Text to Speech
         textToSpeech = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
@@ -117,7 +114,7 @@ public class video extends Fragment {
                 ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 if (matches != null && !matches.isEmpty()) {
                     String spokenText = matches.get(0).trim();
-                    navigateToVideo(spokenText, video_list);
+                    navigateToPdf(spokenText, pdf_list);
                 }
             }
 
@@ -126,7 +123,7 @@ public class video extends Fragment {
                 ArrayList<String> matches = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 if (matches != null && !matches.isEmpty()) {
                     String spokenText = matches.get(0).trim();
-                    navigateToVideo(spokenText, video_list);
+                    navigateToPdf(spokenText, pdf_list);
                 }
             }
 
@@ -137,7 +134,7 @@ public class video extends Fragment {
 
         bind.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
 //
-        adapter = new VideoAdapter(getContext(), video_list, course);
+        adapter = new VideoAdapter(getContext(), pdf_list, course);
 //
         bind.recyclerView.setAdapter(adapter);
 
@@ -147,7 +144,7 @@ public class video extends Fragment {
 
     public void onStart() {
         super.onStart();
-        video_list.clear();
+        pdf_list.clear();
         fireStore.collection("courses").document(course).collection("video").orderBy("timeStamp", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -155,11 +152,9 @@ public class video extends Fragment {
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots
                     ) {
                         Data data = doc.toObject(Data.class);
-                        video_list.add(data);
-                        Log.d("video", data.getUrl());
-                        downloadVideoSubtitles(data.getUrl());
+                        pdf_list.add(data);
                         adapter.notifyDataSetChanged();
-                        //promptUserForVideo();
+                        //promptUserForPdf();
                     }
                 }
             }
@@ -180,16 +175,11 @@ public class video extends Fragment {
         super.onDestroy();
     }
 
-    private void downloadVideoSubtitles(String url) {
-        VideoTextExtractorTask videoTask = new VideoTextExtractorTask(requireContext());
-        videoTask.downloadVideoFromFirebase(url);
-    }
-
-    private void navigateToVideo(String spokenText, ArrayList<Data> video_list) {
-        for (Data video : video_list) {
-            if (video.title.toLowerCase().contains(spokenText.toLowerCase())) {
+    private void navigateToPdf(String spokenText, ArrayList<Data> pdf_list) {
+        for (Data pdf : pdf_list) {
+            if (pdf.title.toLowerCase().contains(spokenText.toLowerCase())) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.parse(video.getUrl()), "application/video");
+                intent.setDataAndType(Uri.parse(pdf.getUrl()), "application/pdf");
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 requireContext().startActivity(intent);
@@ -197,26 +187,15 @@ public class video extends Fragment {
         }
     }
 
-//    public void onVideoItemClick(String videoUrl) {
-//        File audioFile = new File(requireContext().getExternalFilesDir(null), "extracted_audio.wav");
-//        downloadAndExtractAudio(videoUrl, audioFile,
-//                unused -> {
-//                    transcribeAudio(audioFile);
-//                },
-//                e -> {
-//                    Toast.makeText(getContext(), "Error downloading or processing video: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                });
-//    }
-
-    private void promptUserForVideo() {
+    private void promptUserForPdf() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            textToSpeech.speak("Please speak the name of the video", TextToSpeech.QUEUE_FLUSH, null, "INITIAL_PROMPT");
+            textToSpeech.speak("Please speak the name of the pdf", TextToSpeech.QUEUE_FLUSH, null, "INITIAL_PROMPT");
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    final Queue<String> videoNamesQueue = new LinkedList<>();
-                    for (Data item : video_list) {
-                        videoNamesQueue.add(item.title);
+                    final Queue<String> pdfNamesQueue = new LinkedList<>();
+                    for (Data item : pdf_list) {
+                        pdfNamesQueue.add(item.title);
                     }
                     textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
                         @Override
@@ -225,9 +204,9 @@ public class video extends Fragment {
 
                         @Override
                         public void onDone(String utteranceId) {
-                            if (!videoNamesQueue.isEmpty()) {
-                                String nextCourse = videoNamesQueue.poll();  // Get and remove the next course name from the queue
-                                textToSpeech.speak(nextCourse, TextToSpeech.QUEUE_FLUSH, null, "VIDEO_NAME");
+                            if (!pdfNamesQueue.isEmpty()) {
+                                String nextCourse = pdfNamesQueue.poll();  // Get and remove the next course name from the queue
+                                textToSpeech.speak(nextCourse, TextToSpeech.QUEUE_FLUSH, null, "PDF_NAME");
                             }
                         }
 
@@ -238,8 +217,8 @@ public class video extends Fragment {
                     });
 
                     // Start speaking the first course name from the queue
-                    if (!videoNamesQueue.isEmpty()) {
-                        String firstCourse = videoNamesQueue.poll();
+                    if (!pdfNamesQueue.isEmpty()) {
+                        String firstCourse = pdfNamesQueue.poll();
                         textToSpeech.speak(firstCourse, TextToSpeech.QUEUE_FLUSH, null, "COURSE_NAME");
                     }
                 }

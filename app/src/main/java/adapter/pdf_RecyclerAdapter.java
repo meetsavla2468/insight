@@ -58,7 +58,7 @@ public class pdf_RecyclerAdapter extends RecyclerView.Adapter<pdf_RecyclerAdapte
                 case "Java":
                     holder.img.setImageResource(R.drawable.java_logo);
                     break;
-                case "Mathematics":
+                case "MATHEMATICS":
                     holder.img.setImageResource(R.drawable.ic_pi);
                     break;
                 case "Programming with C":
