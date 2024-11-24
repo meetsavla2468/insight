@@ -39,7 +39,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.viewHold> {
         holder.tv.setText(topics.get(position));
         holder.score.setText(scores.get(position));
 
-        switch (topics.get(position)) {
+        switch (topics.get(position).toLowerCase()) {
             case "MATHEMATICS":
                 holder.img.setImageResource(R.drawable.ic_pi);
                 break;
@@ -52,7 +52,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.viewHold> {
             case "Data Structures and Algorithms":
                 holder.img.setImageResource(R.drawable.algo);
                 break;
-            case "Python":
+            default:
                 holder.img.setImageResource(R.drawable.py);
                 break;
         }
