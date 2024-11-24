@@ -26,6 +26,9 @@
             android:exported="false"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".quiz"
+            android:exported="false" />
+        <activity
             android:name=".PersonalChat"
             android:exported="false" />
         <activity
