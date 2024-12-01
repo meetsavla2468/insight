@@ -37,6 +37,7 @@ import okhttp3.Response;
 
 public class gptActivity extends AppCompatActivity {
     String OPENAI_API_KEY = BuildConfig.OPENAI_API_KEY;
+    private String inputMessage = "";
     private RecyclerView chatRecyclerView;
     private EditText messageInput;
     private ImageButton sendButton;
@@ -65,6 +66,7 @@ public class gptActivity extends AppCompatActivity {
                 String userMessage = messageInput.getText().toString().trim();
                 if (!TextUtils.isEmpty(userMessage)) {
                     // Add the user's message to the chat
+                    inputMessage = userMessage;
                     messageList.add(new gptMessage_Model(userMessage, true));
                     chatAdapter.notifyItemInserted(messageList.size() - 1);
                     chatRecyclerView.scrollToPosition(messageList.size() - 1);
@@ -122,7 +124,11 @@ public class gptActivity extends AppCompatActivity {
             JSONArray choicesArray = jsonObject.getJSONArray("choices");
             JSONObject firstChoice = choicesArray.getJSONObject(0);
             JSONObject msg = firstChoice.getJSONObject("message");
-            updateUIWithResponse(msg.getString("content"));
+            String response = msg.getString("content");
+            if (inputMessage.toLowerCase().contains("gpt") || inputMessage.toLowerCase().contains("are you") || inputMessage.toLowerCase().contains("generative pretrained transformer") || response.toLowerCase().contains("gpt") || response.toLowerCase().contains("generative pretrained transformer"))
+                updateUIWithResponse("I am a fine tuned Large Language Model");
+            else
+                updateUIWithResponse(msg.getString("content"));
             Log.d("Info", responseBody);
         } catch (JSONException e) {
             e.printStackTrace();

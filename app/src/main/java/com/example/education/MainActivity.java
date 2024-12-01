@@ -364,22 +364,22 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 return;
             }
         }
-        if (spokenText.equalsIgnoreCase("stories")) {
+        if (spokenText.toLowerCase().contains("stories")) {
             Intent intent = new Intent(MainActivity.this, Pdf_Videos.class);
             intent.putExtra("course", "Stories");
             startActivity(intent);
             return;
-        } else if (spokenText.equalsIgnoreCase("kg")) {
+        } else if (spokenText.toLowerCase().contains("kg")) {
             Intent intent = new Intent(MainActivity.this, Pdf_Videos.class);
             intent.putExtra("course", "KG");
             startActivity(intent);
             return;
-        } else if (spokenText.equalsIgnoreCase("cartoons")) {
+        } else if (spokenText.toLowerCase().contains("cartoons")) {
             Intent intent = new Intent(MainActivity.this, Pdf_Videos.class);
             intent.putExtra("course", "Cartoons");
             startActivity(intent);
             return;
-        } else if (spokenText.equalsIgnoreCase("basic maths")) {
+        } else if (spokenText.toLowerCase().contains("basic maths")) {
             Intent intent = new Intent(MainActivity.this, Pdf_Videos.class);
             intent.putExtra("course", "Basic Maths");
             startActivity(intent);
