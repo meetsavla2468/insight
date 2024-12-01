@@ -40,16 +40,16 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.viewHold> {
         holder.score.setText(scores.get(position));
 
         switch (topics.get(position).toLowerCase()) {
-            case "MATHEMATICS":
+            case "mathematics":
                 holder.img.setImageResource(R.drawable.ic_pi);
                 break;
-            case "Programming with C":
+            case "programming with c":
                 holder.img.setImageResource(R.drawable.cgrm);
                 break;
-            case "App Development":
+            case "app development":
                 holder.img.setImageResource(R.drawable.android_developer);
                 break;
-            case "Data Structures and Algorithms":
+            case "data structures and algorithms":
                 holder.img.setImageResource(R.drawable.algo);
                 break;
             default:

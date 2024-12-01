@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
@@ -348,7 +349,11 @@ public class QuizPlayer extends AppCompatActivity {
         editor.apply();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        String userId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         db.collection("Quiz")
+                .document(userId)
+                .collection("topics")
                 .document(currentTopic)
                 .update("scores", FieldValue.arrayUnion(score))
                 .addOnSuccessListener(aVoid ->
@@ -360,6 +365,8 @@ public class QuizPlayer extends AppCompatActivity {
                         Map<String, Object> initialData = new HashMap<>();
                         initialData.put("scores", Collections.singletonList(score));
                         db.collection("Quiz")
+                                .document(userId)
+                                .collection("topics")
                                 .document(currentTopic)
                                 .set(initialData)
                                 .addOnSuccessListener(aVoid ->

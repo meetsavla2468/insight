@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -90,8 +91,11 @@ public class quiz extends AppCompatActivity {
     private void loadScores(OnScoresLoadedCallback callback) {
         Map<String, Long> allScores = new HashMap<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+        auth = FirebaseAuth.getInstance();
+        String userId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         db.collection("Quiz")
+                .document(userId)
+                .collection("topics")
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     for (DocumentSnapshot document : querySnapshot.getDocuments()) {
@@ -110,7 +114,7 @@ public class quiz extends AppCompatActivity {
                     scores.clear();
                     for (String topic : topics) {
                         Log.d("msg", "Processing topic: " + topic);
-                        String score = allScores.containsKey(topic) ? allScores.get(topic).toString() + "/5" : "0/5";
+                        String score = allScores.containsKey(topic) ? (allScores.get(topic) * 2) + "/10" : "0/10";
                         scores.add(score);
                     }
                     Log.d("msg", "Scores list: " + scores);
