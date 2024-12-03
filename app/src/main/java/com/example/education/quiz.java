@@ -71,21 +71,16 @@ public class quiz extends AppCompatActivity {
     }
 
     private void loadTopics() {
-        topics.add("Science");
-        topics.add("Mathematics");
-        topics.add("English Language");
-        topics.add("Social Studies");
-        topics.add("Geography");
-        topics.add("History");
-        topics.add("Environmental Studies");
-        topics.add("Computer Science");
-        topics.add("C++");
-        topics.add("Java");
-        topics.add("Economics");
-        topics.add("Operating Systems");
-        topics.add("Databases (DBMS)");
-        topics.add("Artificial Intelligence");
+        topics.add("Probability and Statistics");
+        topics.add("Computer Graphics");
+        topics.add("Computer Networks");
         topics.add("Machine Learning");
+        topics.add("DSA");
+        topics.add("Python");
+        topics.add("Java");
+        topics.add("Mathematics");
+        topics.add("Science");
+        topics.add("English Language");
     }
 
     private void loadScores(OnScoresLoadedCallback callback) {
@@ -114,7 +109,7 @@ public class quiz extends AppCompatActivity {
                     scores.clear();
                     for (String topic : topics) {
                         Log.d("msg", "Processing topic: " + topic);
-                        String score = allScores.containsKey(topic) ? (allScores.get(topic) * 2) + "/10" : "0/10";
+                        String score = allScores.containsKey(topic) ? "Score: " + (allScores.get(topic) * 2) + "/10" : "Score: 0/10";
                         scores.add(score);
                     }
                     Log.d("msg", "Scores list: " + scores);

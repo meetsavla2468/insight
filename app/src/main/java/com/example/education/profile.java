@@ -311,17 +311,70 @@ public class profile extends AppCompatActivity {
     }
 
     private int getSubjectImage(String subjectName) {
-        switch (subjectName.toLowerCase()) {
-            case "mathematics":
-                return (R.drawable.ic_pi);
-            case "programming with c":
-                return (R.drawable.cgrm);
-            case "app development":
-                return (R.drawable.android_developer);
-            case "data structures and algorithms":
-                return (R.drawable.algo);
+        switch (subjectName) {
+            case "Science":
+                return R.drawable.science;
+            case "Mathematics":
+                return R.drawable.mathematics;
+            case "English Language":
+                return R.drawable.english;
+            case "Geography":
+                return R.drawable.geography;
+            case "History":
+                return R.drawable.history;
+            case "Physics":
+                return R.drawable.physics;
+            case "Chemistry":
+                return R.drawable.chemistry;
+            case "Biology":
+                return R.drawable.biology;
+            case "Computer Science":
+                return R.drawable.computer_science;
+            case "Python":
+                return R.drawable.python;
+            case "Programming with C":
+                return R.drawable.c;
+            case "C++":
+                return R.drawable.cplusplus;
+            case "Java":
+                return R.drawable.java;
+            case "DSA":
+                return R.drawable.datastructure;
+            case "Web Development":
+                return R.drawable.web;
+            case "App Development":
+                return R.drawable.app;
+            case "Probability and Statistics":
+                return R.drawable.probability;
+            case "Computer Graphics":
+                return R.drawable.cg;
+            case "Operating Systems":
+                return R.drawable.os;
+            case "Databases (DBMS)":
+                return R.drawable.database;
+            case "Artificial Intelligence":
+                return R.drawable.ai;
+            case "Machine Learning":
+                return R.drawable.ml;
+            case "Blockchain":
+                return R.drawable.blockchain;
+            case "Software Engineering":
+                return R.drawable.software;
+            case "Computer Networks":
+                return R.drawable.cn;
+            case "Economics":
+                return R.drawable.economics;
+            case "Stories":
+                return R.drawable.stories;
+            case "KG":
+                return R.drawable.kg;
+            case "Basic Maths":
+                return R.drawable.kid_maths;
+            case "Cartoons":
+                return R.drawable.cartoon;
             default:
-                return (R.drawable.py);
+                return R.drawable.android_developer;
+
         }
     }
 

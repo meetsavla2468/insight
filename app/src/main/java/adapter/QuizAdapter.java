@@ -39,21 +39,87 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.viewHold> {
         holder.tv.setText(topics.get(position));
         holder.score.setText(scores.get(position));
 
-        switch (topics.get(position).toLowerCase()) {
-            case "mathematics":
-                holder.img.setImageResource(R.drawable.ic_pi);
+        switch (topics.get(position)) {
+            case "Science":
+                holder.img.setImageResource(R.drawable.science);
                 break;
-            case "programming with c":
-                holder.img.setImageResource(R.drawable.cgrm);
+            case "Mathematics":
+                holder.img.setImageResource(R.drawable.mathematics);
                 break;
-            case "app development":
-                holder.img.setImageResource(R.drawable.android_developer);
+            case "English Language":
+                holder.img.setImageResource(R.drawable.english);
                 break;
-            case "data structures and algorithms":
-                holder.img.setImageResource(R.drawable.algo);
+            case "Geography":
+                holder.img.setImageResource(R.drawable.geography);
+                break;
+            case "History":
+                holder.img.setImageResource(R.drawable.history);
+                break;
+            case "Physics":
+                holder.img.setImageResource(R.drawable.physics);
+                break;
+            case "Chemistry":
+                holder.img.setImageResource(R.drawable.chemistry);
+                break;
+            case "Biology":
+                holder.img.setImageResource(R.drawable.biology);
+                break;
+            case "Computer Science":
+                holder.img.setImageResource(R.drawable.computer_science);
+                break;
+            case "Python":
+                holder.img.setImageResource(R.drawable.python);
+                break;
+            case "Programming with C":
+                holder.img.setImageResource(R.drawable.c);
+                break;
+            case "C++":
+                holder.img.setImageResource(R.drawable.cplusplus);
+                break;
+            case "Java":
+                holder.img.setImageResource(R.drawable.java);
+                break;
+            case "DSA":
+                holder.img.setImageResource(R.drawable.datastructure);
+                break;
+            case "Web Development":
+                holder.img.setImageResource(R.drawable.web);
+                break;
+            case "App Development":
+                holder.img.setImageResource(R.drawable.app);
+                break;
+            case "Probability and Statistics":
+                holder.img.setImageResource(R.drawable.probability);
+                break;
+            case "Computer Graphics":
+                holder.img.setImageResource(R.drawable.cg);
+                break;
+            case "Operating Systems":
+                holder.img.setImageResource(R.drawable.os);
+                break;
+            case "Databases (DBMS)":
+                holder.img.setImageResource(R.drawable.database);
+                break;
+            case "Artificial Intelligence":
+                holder.img.setImageResource(R.drawable.ai);
+                break;
+            case "Machine Learning":
+                holder.img.setImageResource(R.drawable.ml);
+                break;
+            case "Blockchain":
+                holder.img.setImageResource(R.drawable.blockchain);
+                break;
+            case "Software Engineering":
+                holder.img.setImageResource(R.drawable.software);
+                break;
+            case "Computer Networks":
+                holder.img.setImageResource(R.drawable.cn);
+                break;
+            case "Economics":
+                holder.img.setImageResource(R.drawable.economics);
                 break;
             default:
-                holder.img.setImageResource(R.drawable.py);
+                holder.img.setImageResource(R.drawable.android_developer);
                 break;
         }
 

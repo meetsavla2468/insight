@@ -257,22 +257,98 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                     private int getIconForCourse(String courseName) {
                         int iconResId;
 
-                        switch (courseName.toLowerCase()) {
-                            case "mathematics":
-                                iconResId = R.drawable.ic_pi;
+                        switch (courseName) {
+                            case "Science":
+                                iconResId = R.drawable.science;
                                 break;
-                            case "app development":
-                                iconResId = R.drawable.android_developer;
+                            case "Mathematics":
+                                iconResId = R.drawable.mathematics;
                                 break;
-                            case "web development":
+                            case "English Language":
+                                iconResId = R.drawable.english;
+                                break;
+                            case "Geography":
+                                iconResId = R.drawable.geography;
+                                break;
+                            case "History":
+                                iconResId = R.drawable.history;
+                                break;
+                            case "Physics":
+                                iconResId = R.drawable.physics;
+                                break;
+                            case "Chemistry":
+                                iconResId = R.drawable.chemistry;
+                                break;
+                            case "Biology":
+                                iconResId = R.drawable.biology;
+                                break;
+                            case "Computer Science":
+                                iconResId = R.drawable.computer_science;
+                                break;
+                            case "Python":
+                                iconResId = R.drawable.python;
+                                break;
+                            case "Programming with C":
+                                iconResId = R.drawable.c;
+                                break;
+                            case "C++":
+                                iconResId = R.drawable.cplusplus;
+                                break;
+                            case "Java":
+                                iconResId = R.drawable.java;
+                                break;
+                            case "DSA":
+                                iconResId = R.drawable.datastructure;
+                                break;
+                            case "Web Development":
                                 iconResId = R.drawable.web;
                                 break;
-                            case "java":
-                                iconResId = R.drawable.java_logo;
+                            case "App Development":
+                                iconResId = R.drawable.app;
                                 break;
-                            case "python":
-                                iconResId = R.drawable.py;
+                            case "Probability and Statistics":
+                                iconResId = R.drawable.probability;
                                 break;
+                            case "Computer Graphics":
+                                iconResId = R.drawable.cg;
+                                break;
+                            case "Operating Systems":
+                                iconResId = R.drawable.os;
+                                break;
+                            case "Databases (DBMS)":
+                                iconResId = R.drawable.database;
+                                break;
+                            case "Artificial Intelligence":
+                                iconResId = R.drawable.ai;
+                                break;
+                            case "Machine Learning":
+                                iconResId = R.drawable.ml;
+                                break;
+                            case "Blockchain":
+                                iconResId = R.drawable.blockchain;
+                                break;
+                            case "Software Engineering":
+                                iconResId = R.drawable.software;
+                                break;
+                            case "Computer Networks":
+                                iconResId = R.drawable.cn;
+                                break;
+                            case "Economics":
+                                iconResId = R.drawable.economics;
+                                break;
+                            case "Stories":
+                                iconResId = R.drawable.stories;
+                                break;
+                            case "KG":
+                                iconResId = R.drawable.kg;
+                                break;
+                            case "Basic Maths":
+                                iconResId = R.drawable.kid_maths;
+                                break;
+                            case "Cartoons":
+                                iconResId = R.drawable.cartoon;
+                                break;
+
                             default:
                                 iconResId = R.drawable.android_developer;
                                 break;
