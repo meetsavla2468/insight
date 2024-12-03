@@ -14,15 +14,7 @@ The welcoming splash screen that appears when you launch the Insight app.
 
 ---
 
-### 2. **Home Screen**
-
-<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/home.jpeg" width="300" />
-
-The main dashboard that provides easy navigation to all sections of the platform.
-
----
-
-### 3. **Login Screen**
+### 2. **Login Screen**
 
 <img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/login.jpeg" width="300" />
 
@@ -30,7 +22,7 @@ Login screen where users can securely sign in to access their personalized learn
 
 ---
 
-### 4. **Registration Screen**
+### 3. **Registration Screen**
 
 <img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/register.jpeg" width="300" />
 
@@ -38,71 +30,15 @@ Create an account and join the Insight community with a simple registration proc
 
 ---
 
-### 5. **Discussion Area**
+### 4. **Home Screen**
 
-<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/discuss.jpeg" width="300" />
+<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/home.jpeg" width="300" />
 
-Engage in collaborative learning and discussions with other learners and educators.
-
----
-
-### 6. **Quiz Dashboard**
-
-<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/quiz%20dashboard.jpeg" width="300" />
-
-The quiz dashboard where learners can access and track their quizzes.
+The main dashboard that provides easy navigation to all sections of the platform.
 
 ---
 
-### 7. **Quiz Question**
-
-<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/quiz%20question.jpeg" width="300" />
-
-A sample quiz question from the Insight app to test your knowledge on various topics.
-
----
-
-### 8. **Search Functionality**
-
-<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/search.jpeg" width="300" />
-
-Quickly search for courses and materials with the efficient search feature.
-
----
-
-### 9. **Mental Wellness Chat Bot**
-
-<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/mental%20wellness.jpeg" width="300" />
-
-Participate in discussions about mental wellness and peace with a chatbot.
-
----
-
-### 10. **Profile Screen**
-
-<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/profile.jpeg" width="300" />
-
-Your personalized profile page where you can manage your learning preferences.
-
----
-
-### 11. **Upload Material**
-
-<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/upload.jpeg" width="300" />
-
-Upload your study materials, including images, videos, PDFs, and more for others to access.
-
----
-
-### 12. **Video Content**
-
-<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/video.jpeg" width="300" />
-
-Access and watch educational videos directly within the app to enhance learning.
-
----
-
-### 13. **Sidebar Navigation**
+### 5. **Sidebar Navigation**
 
 <img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/sidebar.jpeg" width="300" />
 
@@ -110,7 +46,39 @@ Use the sidebar for easy navigation and quick access to key sections of the plat
 
 ---
 
-### 14. **PDF Viewer**
+### 6. **Search Functionality**
+
+<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/search.jpeg" width="300" />
+
+Quickly search for courses and materials with the efficient search feature.
+
+---
+
+### 7. **Quiz Dashboard**
+
+<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/quiz%20dashboard.jpeg" width="300" />
+
+The quiz dashboard where learners can access and track their quizzes.
+
+---
+
+### 8. **Quiz Question**
+
+<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/quiz%20question.jpeg" width="300" />
+
+A sample quiz question from the Insight app to test your knowledge on various topics.
+
+---
+
+### 9. **Upload Material**
+
+<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/upload.jpeg" width="300" />
+
+Upload your study materials, including images, videos, PDFs, and more for others to access.
+
+---
+
+### 10. **PDF Viewer**
 
 <img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/pdf.jpeg" width="300" />
 
@@ -118,11 +86,43 @@ View and interact with educational PDFs directly in the app.
 
 ---
 
-### 15. **Doubt Chat Bot**
+### 11. **Video Content**
+
+<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/video.jpeg" width="300" />
+
+Access and watch educational videos directly within the app to enhance learning.
+
+---
+
+### 12. **Mental Wellness Chat Bot**
+
+<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/mental%20wellness.jpeg" width="300" />
+
+Participate in discussions about mental wellness and peace with a chatbot.
+
+---
+
+### 13. **Discussion Area**
+
+<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/discuss.jpeg" width="300" />
+
+Engage in collaborative learning and discussions with other learners and educators.
+
+---
+
+### 14. **Doubt Chat Bot**
 
 <img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/doubts.jpeg" width="300" />
 
 Ask doubts to a trained LLM which will provide clear and detailed answers.
+
+---
+
+### 15. **Profile Screen**
+
+<img src="https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/profile.jpeg" width="300" />
+
+Your personalized profile page where you can manage your learning preferences.
 
 ---
 
