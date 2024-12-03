@@ -23,11 +23,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import Model.Course_Model;
 import adapter.SearchAdapter;
 
 public class search extends AppCompatActivity {
     SearchAdapter adapter;
-    ActivitySearchBinding bind ;
+    ActivitySearchBinding bind;
     ArrayList<String> arrayList;
     ArrayList<String> list;
     FirebaseAuth auth;
@@ -36,30 +37,30 @@ public class search extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bind=ActivitySearchBinding.inflate(getLayoutInflater());
+        bind = ActivitySearchBinding.inflate(getLayoutInflater());
         setContentView(bind.getRoot());
-        arrayList=new ArrayList<>();
-        list=new ArrayList<>();
+        arrayList = new ArrayList<>();
+        list = new ArrayList<>();
         auth = FirebaseAuth.getInstance();
         fireStore = FirebaseFirestore.getInstance();
-        adapter=new SearchAdapter(this,arrayList);
+        adapter = new SearchAdapter(this, arrayList);
         bind.searchRv.setLayoutManager(new LinearLayoutManager(this));
         bind.searchRv.setAdapter(adapter);
         fireStore.collection("courses").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if(queryDocumentSnapshots!=null){
+                if (queryDocumentSnapshots != null) {
                     list.clear();
-                    for (QueryDocumentSnapshot snap:queryDocumentSnapshots
+                    for (QueryDocumentSnapshot snap : queryDocumentSnapshots
                     ) {
-                        String course= snap.getId();
-
-                        list.add(course);
-//                        adapter.notifyDataSetChanged();
+                        String course = snap.getId();
+                        if (!course.equals("Basic Maths") && !course.equals("Stories") && !course.equals("KG") && !course.equals("Cartoons")) {
+                            list.add(course);
+                        }
                     }
-                        arrayList.clear();
-                        arrayList.addAll(list);
-                        adapter.notifyDataSetChanged();
+                    arrayList.clear();
+                    arrayList.addAll(list);
+                    adapter.notifyDataSetChanged();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -88,19 +89,19 @@ public class search extends AppCompatActivity {
         });
 
     }
-    private void searchFun(CharSequence str){
+
+    private void searchFun(CharSequence str) {
 
 
-        if(TextUtils.isEmpty(str)){
+        if (TextUtils.isEmpty(str)) {
             arrayList.clear();
             arrayList.addAll(list);
             adapter.notifyDataSetChanged();
-        }
-        else{
+        } else {
             arrayList.clear();
-            for (String item:list
-                 ) {
-                if(item.contains(str)){
+            for (String item : list
+            ) {
+                if (item.contains(str)) {
                     arrayList.add(item);
                 }
             }

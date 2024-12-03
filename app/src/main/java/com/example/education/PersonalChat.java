@@ -44,7 +44,7 @@ import java.util.Objects;
 import Model.MsgModel;
 import adapter.chatAdapter;
 
-public class PersonalChat extends AppCompatActivity{
+public class PersonalChat extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1932;
     private ActivityPersonalChatBinding binding;
@@ -58,49 +58,9 @@ public class PersonalChat extends AppCompatActivity{
 
     private chatAdapter adapter;
     private ListenerRegistration listenerRegistration;
-    private  String name;
+    private String name;
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityPersonalChatBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        firestore = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
-        storage=FirebaseStorage.getInstance();
-        getSupportActionBar().hide();
-        progressDialogExample=new ProgressDialog(this);
-        progressDialogExample.setMessage("Sending...");
-        progressDialogExample.setCancelable(false);
-
-
-        list = new ArrayList<>();
-        adapter = new chatAdapter(this, list);
-        binding.msgRv.setHasFixedSize(true);
-        binding.usernameTxt.setSelected(true);
-        binding.msgRv.setLayoutManager(new LinearLayoutManagerWrapper(PersonalChat.this, LinearLayoutManager.VERTICAL, true));
-        binding.msgRv.setAdapter(adapter);
-        firestore.collection("Users").document(Objects.requireNonNull(auth.getUid())).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if(documentSnapshot!=null){
-                            name=Objects.requireNonNull(documentSnapshot.get("userName")).toString();
-                        }
-                    }
-                });
-
-
-
-
-
-        show();
-        notChecked();
-    }
-
-
-    public void getRes(View v){
+    public void getRes(View v) {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("*/*");
         intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*", "video/*", "application/pdf", "application/msword", "application/vnd.ms-powerpoint", "application/vnd.ms-excel"});
@@ -125,14 +85,14 @@ public class PersonalChat extends AppCompatActivity{
                 DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
                 Date date = new Date();
                 String timeS = formatter.format(date);
-                String timeStamp=String.valueOf(new Date().getTime());
-                storage.getReference().child("Discussion").child(auth.getUid()+timeStamp).putFile(selectedFileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                String timeStamp = String.valueOf(new Date().getTime());
+                storage.getReference().child("Discussion").child(auth.getUid() + timeStamp).putFile(selectedFileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        storage.getReference().child("Discussion").child(auth.getUid()+timeStamp).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        storage.getReference().child("Discussion").child(auth.getUid() + timeStamp).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                firestore.collection("Discussion").document().set(new MsgModel(timeStamp, auth.getUid(), uri.toString(), timeS,name,fileType)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                firestore.collection("Discussion").document().set(new MsgModel(timeStamp, auth.getUid(), uri.toString(), timeS, name, fileType)).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         progressDialogExample.dismiss();
@@ -177,128 +137,60 @@ public class PersonalChat extends AppCompatActivity{
         }
 
     }
-    private String getFileType(Uri uri) {
-//        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        String fileExtension = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
-        String mimeType = mimeTypeMap.getMimeTypeFromExtension(fileExtension.toLowerCase());
 
-        if (mimeType != null) {
-            if (mimeType.startsWith("image")) {
-                return "Image";
-            } else if (mimeType.startsWith("video")) {
-                return "Video";
-            } else if (mimeType.equals("application/pdf")) {
-                return "PDF";
-            } else if (mimeType.equals("application/msword") || mimeType.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
-                return "Word Document";
-            } else if (mimeType.equals("application/vnd.ms-powerpoint") || mimeType.equals("application/vnd.openxmlformats-officedocument.presentationml.presentation")) {
-                return "PowerPoint Presentation";
-            } else if (mimeType.equals("application/vnd.ms-excel") || mimeType.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
-                return "Excel Spreadsheet";
-            } else {
-                return "Unknown1";
-            }
-        }
-        String filePath=getFilePath(uri);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityPersonalChatBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        return getFileType2(filePath);
-    }
-    private String getFileType2(String filePath) {
-        String fileType = null;
-        if (filePath != null) {
-            String extension = getFileExtension(filePath);
-            if (extension != null && !extension.isEmpty()) {
-                if (extension.equalsIgnoreCase("pdf")) {
-                    fileType = "PDF";
-                } else if (extension.equalsIgnoreCase("doc") || extension.equalsIgnoreCase("docx")) {
-                    fileType = "Word Document";
-                } else if (extension.equalsIgnoreCase("ppt") || extension.equalsIgnoreCase("pptx")) {
-                    fileType = "PowerPoint Presentation";
-                } else if (extension.equalsIgnoreCase("xls") || extension.equalsIgnoreCase("xlsx")) {
-                    fileType = "Excel Spreadsheet";
-                } else if (extension.equalsIgnoreCase("jpg") || extension.equalsIgnoreCase("jpeg") || extension.equalsIgnoreCase("png")) {
-                    fileType = "Image";
-                } else if (extension.equalsIgnoreCase("mp4") || extension.equalsIgnoreCase("3gp") || extension.equalsIgnoreCase("avi")) {
-                    fileType = "Video";
-                } else {
-                    fileType = "Unknown";
+        firestore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
+        //getSupportActionBar().hide();
+        progressDialogExample = new ProgressDialog(this);
+        progressDialogExample.setMessage("Sending...");
+        progressDialogExample.setCancelable(false);
+
+
+        list = new ArrayList<>();
+        adapter = new chatAdapter(this, list);
+        binding.msgRv.setHasFixedSize(true);
+        binding.usernameTxt.setSelected(true);
+        binding.msgRv.setLayoutManager(new LinearLayoutManagerWrapper(PersonalChat.this, LinearLayoutManager.VERTICAL, true));
+        binding.msgRv.setAdapter(adapter);
+        firestore.collection("Users").document(Objects.requireNonNull(auth.getUid())).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot != null) {
+                    name = Objects.requireNonNull(documentSnapshot.get("userName")).toString();
                 }
             }
-        }
-        return fileType;
-    }
-    private String getFileExtension(String filePath) {
-        String extension = null;
-        if (filePath != null && !filePath.isEmpty()) {
-            int dotIndex = filePath.lastIndexOf(".");
-            if (dotIndex != -1 && dotIndex < filePath.length() - 1) {
-                extension = filePath.substring(dotIndex + 1).toLowerCase();
-            }
-        }
-        return extension;
+        });
+
+
+        show();
+        notChecked();
     }
 
-
-
-    private String getFilePath(Uri selectedFileUri) {
-
-        String filePath = null;
-        String[] projection = {MediaStore.MediaColumns.DATA};
-        Cursor cursor = getContentResolver().query(selectedFileUri, projection, null, null, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-            filePath = cursor.getString(columnIndex);
-            cursor.close();
-        }
-
-        if (filePath == null) {
-            try {
-                InputStream inputStream = getContentResolver().openInputStream(selectedFileUri);
-                if (inputStream != null) {
-                    File tempFile = createTempFileFromInputStream(inputStream);
-                    filePath = tempFile.getAbsolutePath();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return filePath;
-    }
-    private File createTempFileFromInputStream(InputStream inputStream) throws IOException {
-        File tempFile = File.createTempFile("temp", null);
-        tempFile.deleteOnExit();
-        FileOutputStream out = new FileOutputStream(tempFile);
-        byte[] buffer = new byte[4096];
-        int bytesRead;
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            out.write(buffer, 0, bytesRead);
-        }
-        out.flush();
-        out.close();
-        inputStream.close();
-        return tempFile;
-    }
-
-    private void show(){
+    private void show() {
         final boolean[] firstLoad = {true};
         list.clear();
-        listenerRegistration= firestore.collection("Discussion").orderBy("timeStamp", Query.Direction.DESCENDING).addSnapshotListener(  (value, error) -> {
+        listenerRegistration = firestore.collection("Discussion").orderBy("timeStamp", Query.Direction.DESCENDING).addSnapshotListener((value, error) -> {
 
-            if(error!=null){
+            if (error != null) {
                 Toast.makeText(PersonalChat.this, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-            else{
-                if(value!=null) {
+            } else {
+                if (value != null) {
                     if (firstLoad[0]) {
                         list.clear();
 
                         for (DocumentChange snapshot : value.getDocumentChanges()) {
-                            if(snapshot.getType()== DocumentChange.Type.ADDED) {
+                            if (snapshot.getType() == DocumentChange.Type.ADDED) {
                                 MsgModel msgModel = snapshot.getDocument().toObject(MsgModel.class);
                                 msgModel.setDocumentId(snapshot.getDocument().getId());
 
-                             //   Toast.makeText(getApplicationContext(), a, Toast.LENGTH_SHORT).show();
+                                //   Toast.makeText(getApplicationContext(), a, Toast.LENGTH_SHORT).show();
 
                                 list.add(msgModel);
                                 adapter.notifyItemInserted(list.size() - 1);
@@ -324,7 +216,6 @@ public class PersonalChat extends AppCompatActivity{
         });
     }
 
-
     private void notChecked() {
         binding.imageButton2.setOnClickListener(v -> {
             String msg = binding.editTextTextMultiLine.getText().toString().trim();
@@ -336,16 +227,120 @@ public class PersonalChat extends AppCompatActivity{
                 DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
                 Date date = new Date();
                 String timeS = formatter.format(date);
-                String timeStamp=String.valueOf(new Date().getTime());
-                firestore.collection("Discussion").document().set(new MsgModel(timeStamp, auth.getUid(), msg, timeS,name,"text")).addOnFailureListener(e -> Toast.makeText(PersonalChat.this, "Failed to send msg", Toast.LENGTH_SHORT).show());
+                String timeStamp = String.valueOf(new Date().getTime());
+                firestore.collection("Discussion").document().set(new MsgModel(timeStamp, auth.getUid(), msg, timeS, name, "text")).addOnFailureListener(e -> Toast.makeText(PersonalChat.this, "Failed to send msg", Toast.LENGTH_SHORT).show());
             }
         });
+    }
+
+    private String getFileType(Uri uri) {
+//        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        String fileExtension = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
+        String mimeType = mimeTypeMap.getMimeTypeFromExtension(fileExtension.toLowerCase());
+
+        if (mimeType != null) {
+            if (mimeType.startsWith("image")) {
+                return "Image";
+            } else if (mimeType.startsWith("video")) {
+                return "Video";
+            } else if (mimeType.equals("application/pdf")) {
+                return "PDF";
+            } else if (mimeType.equals("application/msword") || mimeType.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+                return "Word Document";
+            } else if (mimeType.equals("application/vnd.ms-powerpoint") || mimeType.equals("application/vnd.openxmlformats-officedocument.presentationml.presentation")) {
+                return "PowerPoint Presentation";
+            } else if (mimeType.equals("application/vnd.ms-excel") || mimeType.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
+                return "Excel Spreadsheet";
+            } else {
+                return "Unknown1";
+            }
+        }
+        String filePath = getFilePath(uri);
+
+        return getFileType2(filePath);
+    }
+
+    private String getFilePath(Uri selectedFileUri) {
+
+        String filePath = null;
+        String[] projection = {MediaStore.MediaColumns.DATA};
+        Cursor cursor = getContentResolver().query(selectedFileUri, projection, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            filePath = cursor.getString(columnIndex);
+            cursor.close();
+        }
+
+        if (filePath == null) {
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(selectedFileUri);
+                if (inputStream != null) {
+                    File tempFile = createTempFileFromInputStream(inputStream);
+                    filePath = tempFile.getAbsolutePath();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return filePath;
+    }
+
+    private String getFileType2(String filePath) {
+        String fileType = null;
+        if (filePath != null) {
+            String extension = getFileExtension(filePath);
+            if (extension != null && !extension.isEmpty()) {
+                if (extension.equalsIgnoreCase("pdf")) {
+                    fileType = "PDF";
+                } else if (extension.equalsIgnoreCase("doc") || extension.equalsIgnoreCase("docx")) {
+                    fileType = "Word Document";
+                } else if (extension.equalsIgnoreCase("ppt") || extension.equalsIgnoreCase("pptx")) {
+                    fileType = "PowerPoint Presentation";
+                } else if (extension.equalsIgnoreCase("xls") || extension.equalsIgnoreCase("xlsx")) {
+                    fileType = "Excel Spreadsheet";
+                } else if (extension.equalsIgnoreCase("jpg") || extension.equalsIgnoreCase("jpeg") || extension.equalsIgnoreCase("png")) {
+                    fileType = "Image";
+                } else if (extension.equalsIgnoreCase("mp4") || extension.equalsIgnoreCase("3gp") || extension.equalsIgnoreCase("avi")) {
+                    fileType = "Video";
+                } else {
+                    fileType = "Unknown";
+                }
+            }
+        }
+        return fileType;
+    }
+
+    private File createTempFileFromInputStream(InputStream inputStream) throws IOException {
+        File tempFile = File.createTempFile("temp", null);
+        tempFile.deleteOnExit();
+        FileOutputStream out = new FileOutputStream(tempFile);
+        byte[] buffer = new byte[4096];
+        int bytesRead;
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            out.write(buffer, 0, bytesRead);
+        }
+        out.flush();
+        out.close();
+        inputStream.close();
+        return tempFile;
+    }
+
+    private String getFileExtension(String filePath) {
+        String extension = null;
+        if (filePath != null && !filePath.isEmpty()) {
+            int dotIndex = filePath.lastIndexOf(".");
+            if (dotIndex != -1 && dotIndex < filePath.length() - 1) {
+                extension = filePath.substring(dotIndex + 1).toLowerCase();
+            }
+        }
+        return extension;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(listenerRegistration!=null){
+        if (listenerRegistration != null) {
             listenerRegistration.remove();
         }
     }

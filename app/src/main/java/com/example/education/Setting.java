@@ -3,7 +3,6 @@ package com.example.education;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
@@ -32,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import okhttp3.Call;
@@ -49,6 +47,8 @@ import android.widget.Toast;
 
 public class Setting extends AppCompatActivity implements PdfExtractionCallback {
     private static final int PICK_PDF_REQUEST = 1;
+    String OPENAI_API_KEY = BuildConfig.OPENAI_API_KEY;
+    private String inputMessage = "";
     private RecyclerView chatRecyclerView;
     private EditText messageInput;
     private ImageButton sendButton;
@@ -99,6 +99,7 @@ public class Setting extends AppCompatActivity implements PdfExtractionCallback 
                 String userMessage = messageInput.getText().toString().trim();
                 if (!TextUtils.isEmpty(userMessage)) {
                     // Add the user's message to the chat
+                    inputMessage = userMessage;
                     messageList.add(new gptMessage_Model(userMessage, true));
                     chatAdapter.notifyItemInserted(messageList.size() - 1);
                     chatRecyclerView.scrollToPosition(messageList.size() - 1);
@@ -155,7 +156,7 @@ public class Setting extends AppCompatActivity implements PdfExtractionCallback 
         // Make the POST request to the GPT API
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/chat/completions")
-                .addHeader("Authorization", "Bearer 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")
+                .addHeader("Authorization", "Bearer " + OPENAI_API_KEY)
                 .addHeader("Content-Type", "application/json")
                 .post(body)
                 .build();
@@ -189,7 +190,11 @@ public class Setting extends AppCompatActivity implements PdfExtractionCallback 
             JSONArray choicesArray = jsonObject.getJSONArray("choices");
             JSONObject firstChoice = choicesArray.getJSONObject(0);
             JSONObject msg = firstChoice.getJSONObject("message");
-            updateUIWithResponse(msg.getString("content"));
+            String response = msg.getString("content");
+            if (inputMessage.toLowerCase().contains("gpt") || inputMessage.toLowerCase().contains("are you") || inputMessage.toLowerCase().contains("generative pretrained transformer") || response.toLowerCase().contains("gpt") || response.toLowerCase().contains("generative pretrained transformer"))
+                updateUIWithResponse("I am a fine tuned Large Language Model");
+            else
+                updateUIWithResponse(msg.getString("content"));
             Log.d("Info", responseBody);
         } catch (JSONException e) {
             e.printStackTrace();

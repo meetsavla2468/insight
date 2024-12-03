@@ -9,49 +9,48 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/diagonalLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_240mdp"
+            android:background="@drawable/diagonal_view"
             android:contentDescription="profile bg img"
             android:scaleType="fitXY"
             android:src="@drawable/classroom_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/diagonal_view"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="@dimen/_250mdp"
             android:background="@drawable/diagonal_view"
+            app:layout_constraintBottom_toBottomOf="@+id/diagonalLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/diagonalLayout"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!--    </com.github.florent37.diagonallayout.DiagonalLayout>-->
         <View
-            android:backgroundTint="#FF5722"
             android:layout_width="@dimen/_104mdp"
             android:layout_height="@dimen/_104mdp"
             android:background="@drawable/circle_bg"
-            app:layout_constraintStart_toStartOf="@+id/prf_img"
-            app:layout_constraintTop_toTopOf="@+id/prf_img"
-            app:layout_constraintEnd_toEndOf="@+id/prf_img"
+            android:backgroundTint="#FF5722"
             app:layout_constraintBottom_toBottomOf="@+id/prf_img"
-            />
+            app:layout_constraintEnd_toEndOf="@+id/prf_img"
+            app:layout_constraintStart_toStartOf="@+id/prf_img"
+            app:layout_constraintTop_toTopOf="@+id/prf_img" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/prf_img"
             android:layout_width="@dimen/_100mdp"
             android:layout_height="@dimen/_100mdp"
-            android:scaleType="centerCrop"
-            app:civ_border_color="@color/white"
-            android:src="@drawable/boy_bag"
             android:elevation="@dimen/_25font_mdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/boy_bag"
+            app:civ_border_color="@color/white"
             app:civ_border_width="@dimen/_2mdp"
             app:layout_constraintBottom_toBottomOf="@+id/diagonalLayout"
             app:layout_constraintEnd_toEndOf="@+id/diagonalLayout"
@@ -65,11 +64,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10mdp"
             android:clickable="true"
-            android:textAlignment="center"
             android:fontFamily="serif"
             android:paddingStart="@dimen/_10mdp"
             android:paddingEnd="@dimen/_10mdp"
             android:text="Username"
+            android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/_20font_mdp"
             android:textStyle="bold"
@@ -82,26 +81,25 @@
             android:id="@+id/cardView"
             android:layout_width="@dimen/_280mdp"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:cardElevation="10dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username_prf_page"
 
-            android:visibility="gone">
+            app:layout_constraintTop_toBottomOf="@+id/username_prf_page">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp"
-                >
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" Courses"
+                    android:text="Average Quiz Scores"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_11font_mdp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -114,14 +112,13 @@
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:maxLines="1"
                     android:gravity="center"
+                    android:maxLines="1"
+                    android:text="0"
                     android:textSize="@dimen/_11font_mdp"
                     app:layout_constraintEnd_toStartOf="@id/view"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
                 <View
 
@@ -141,22 +138,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" Pdf "
-                    android:textSize="@dimen/_11font_mdp"
-
                     android:textColor="@color/black"
+
+                    android:textSize="@dimen/_11font_mdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/view2"
                     app:layout_constraintStart_toEndOf="@+id/view"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintVertical_bias="0.07999998"/>
+                    app:layout_constraintVertical_bias="0.07999998" />
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:maxLines="1"
                     android:gravity="center"
+                    android:maxLines="1"
+                    android:text="0"
                     android:textSize="@dimen/_11font_mdp"
                     app:layout_constraintEnd_toStartOf="@id/view2"
                     app:layout_constraintStart_toStartOf="@+id/view"
@@ -178,21 +175,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Videos"
-                    android:textSize="@dimen/_11font_mdp"
                     android:textColor="@color/black"
+                    android:textSize="@dimen/_11font_mdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/view2"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintVertical_bias="0.07999998"/>
+                    app:layout_constraintVertical_bias="0.07999998" />
 
                 <TextView
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:maxLines="1"
                     android:gravity="center"
+                    android:maxLines="1"
+                    android:text="0"
                     android:textSize="@dimen/_11font_mdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/view2"
@@ -204,20 +201,33 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_3mdp"
             android:layout_marginStart="@dimen/_20mdp"
-            android:text="Courses"
+            android:layout_marginTop="@dimen/_5mdp"
+            android:text="Average Quiz Scores"
             android:textColor="@color/black"
             android:textSize="@dimen/_15font_mdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
         <View
             android:id="@+id/view3"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_5mdp"
             android:background="#A5A4A4"
-            app:layout_constraintTop_toBottomOf="@+id/textView14"
-            android:layout_marginTop="@dimen/_5mdp"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+        <LinearLayout
+            android:id="@+id/subject_scores_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/connection_prf_rv"

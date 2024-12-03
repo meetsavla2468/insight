@@ -247,6 +247,7 @@ public class pdf extends Fragment {
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 requireContext().startActivity(intent);
                 String pdfUrl = pdf.getUrl();
+                Log.d("msg", pdfUrl);
                 task.execute(pdfUrl);
             }
         }

@@ -35,17 +35,34 @@
                 card_view:cardElevation="4dp"
                 card_view:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/text_UserName"
-                    style="@style/viewParent.headerText"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingStart="10dp"
-                    android:paddingLeft="10dp"
-                    android:text="Hello, Avid Learner!"
-                    android:textColor="#0761F8"
-                    android:textSize="25sp" />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/text_UserName"
+                        style="@style/viewParent.headerText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:text="Hello, Avid Learner!"
+                        android:textColor="#0761F8"
+                        android:textSize="22sp" />
+
+                    <ImageView
+                        android:id="@+id/icon"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/camera" />
+
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
