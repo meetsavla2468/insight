@@ -8,7 +8,7 @@ features to enhance your educational experience.
 
 ### 1. **Splash Screen**
 
-![Splash Screen](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/splash.jpeg)
+![Splash Screen](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/splash.jpeg)
 
 The welcoming splash screen that appears when you launch the Insight app.
 
@@ -16,7 +16,7 @@ The welcoming splash screen that appears when you launch the Insight app.
 
 ### 2. **Home Screen**
 
-![Home Screen](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/home.jpeg)
+![Home Screen](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/home.jpeg)
 
 The main dashboard that provides easy navigation to all sections of the platform.
 
@@ -24,7 +24,7 @@ The main dashboard that provides easy navigation to all sections of the platform
 
 ### 3. **Login Screen**
 
-![Login Screen](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/login.jpeg)
+![Login Screen](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/login.jpeg)
 
 Login screen where users can securely sign in to access their personalized learning content.
 
@@ -32,7 +32,7 @@ Login screen where users can securely sign in to access their personalized learn
 
 ### 4. **Registration Screen**
 
-![Registration Screen](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/register.jpeg)
+![Registration Screen](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/register.jpeg)
 
 Create an account and join the Insight community with a simple registration process.
 
@@ -40,7 +40,7 @@ Create an account and join the Insight community with a simple registration proc
 
 ### 5. **Discussion Area**
 
-![Discussion Area](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/discuss.jpeg)
+![Discussion Area](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/discuss.jpeg)
 
 Engage in collaborative learning and discussions with other learners and educators.
 
@@ -48,7 +48,7 @@ Engage in collaborative learning and discussions with other learners and educato
 
 ### 6. **Quiz Dashboard**
 
-![Quiz Dashboard](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/quiz%20dashboard.jpeg)
+![Quiz Dashboard](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/quiz%20dashboard.jpeg)
 
 The quiz dashboard where learners can access and track their quizzes.
 
@@ -56,7 +56,7 @@ The quiz dashboard where learners can access and track their quizzes.
 
 ### 7. **Quiz Question**
 
-![Quiz Question](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/quiz%20question.jpeg)
+![Quiz Question](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/quiz%20question.jpeg)
 
 A sample quiz question from the Insight app to test your knowledge on various topics.
 
@@ -64,7 +64,7 @@ A sample quiz question from the Insight app to test your knowledge on various to
 
 ### 8. **Search Functionality**
 
-![Search Functionality](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/search.jpeg)
+![Search Functionality](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/search.jpeg)
 
 Quickly search for courses and materials with the efficient search feature.
 
@@ -72,15 +72,15 @@ Quickly search for courses and materials with the efficient search feature.
 
 ### 9. **Mental wellness chat bot**
 
-![Top Courses](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/mental%20wellness.jpeg)
+![Mental Wellness Chat Bot](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/mental%20wellness.jpeg)
 
-Discover the top-rated and popular courses in the Insight app.
+Participate in discussion about mental wellness and peace with a chat bot.
 
 ---
 
 ### 10. **Profile Screen**
 
-![Profile Screen](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/profile.jpeg)
+![Profile Screen](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/profile.jpeg)
 
 Your personalized profile page where you can manage your learning preferences.
 
@@ -88,7 +88,7 @@ Your personalized profile page where you can manage your learning preferences.
 
 ### 11. **Upload Material**
 
-![Upload Material](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/upload.jpeg)
+![Upload Material](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/upload.jpeg)
 
 Upload your study materials, including images, videos, PDFs, and more for others to access.
 
@@ -96,7 +96,7 @@ Upload your study materials, including images, videos, PDFs, and more for others
 
 ### 12. **Video Content**
 
-![Video Content](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/video.jpeg)
+![Video Content](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/video.jpeg)
 
 Access and watch educational videos directly within the app to enhance learning.
 
@@ -104,7 +104,7 @@ Access and watch educational videos directly within the app to enhance learning.
 
 ### 13. **Sidebar Navigation**
 
-![Sidebar Navigation](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/sidebar.jpeg)
+![Sidebar Navigation](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/sidebar.jpeg)
 
 Use the sidebar for easy navigation and quick access to key sections of the platform.
 
@@ -112,17 +112,17 @@ Use the sidebar for easy navigation and quick access to key sections of the plat
 
 ### 14. **PDF Viewer**
 
-![PDF Viewer](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/pdf.jpeg)
+![PDF Viewer](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/pdf.jpeg)
 
 View and interact with educational PDFs directly in the app.
 
 ---
 
-### 15. **Discussion**
+### 15. **Doubt chat bot**
 
-![Course Discussion](https://github.com/meetsavla2468/insight/app/src/main/res/screenshots/doubts.jpeg)
+![Doubt Chat Bot](https://raw.githubusercontent.com/meetsavla2468/insight/refs/heads/masterCopy/app/src/main/res/screenshots/doubts.jpeg)
 
-Participate in course-specific discussions where learners and instructors can collaborate.
+Ask doubts to a trained LLM which will provide clear and detailed answers.
 
 ---
 
