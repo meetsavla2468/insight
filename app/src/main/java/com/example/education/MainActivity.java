@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                             }
                             list = new ArrayList<>();
                             for (String courseName : courseNameList) {
-                                if (!Objects.equals(courseName, "Basic Maths") || !Objects.equals(courseName, "Stories") || !Objects.equals(courseName, "KG") || !Objects.equals(courseName, "Cartoons")) {
+                                if (!courseName.equals("Basic Maths") && !courseName.equals("Stories") && !courseName.equals("KG") && !courseName.equals("Cartoons")) {
                                     list.add(new Course_Model(courseName, getIconForCourse(courseName)));
                                 }
                             }
