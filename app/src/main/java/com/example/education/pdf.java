@@ -216,7 +216,7 @@ public class pdf extends Fragment {
                         textToSpeech.speak(firstCourse, TextToSpeech.QUEUE_FLUSH, null, "COURSE_NAME");
                     }
                 }
-            }, 2000);
+            }, 2500);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -224,7 +224,7 @@ public class pdf extends Fragment {
                     speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, 5000);
                     speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS, 5000);
                 }
-            }, 3000);
+            }, pdf_list.size() * 1000L + 3500);
         }
     }
 

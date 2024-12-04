@@ -55,6 +55,7 @@ public class Setting extends AppCompatActivity implements PdfExtractionCallback 
     private ImageButton uploadButton;
     private gptAdapter chatAdapter;
     private List<gptMessage_Model> messageList;
+    private List<JSONObject> conversationHistory;
     private String extractedPdfText = "";
 
     @Override
@@ -83,14 +84,24 @@ public class Setting extends AppCompatActivity implements PdfExtractionCallback 
         uploadButton.setOnClickListener(v -> openFilePicker());
 
         messageList = new ArrayList<>();
+        conversationHistory = new ArrayList<>();
         chatAdapter = new gptAdapter(this, messageList);
         chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatRecyclerView.setAdapter(chatAdapter);
 
         try {
-            sendToGPT("Your task is to return as your response the following sentence exactly word to word :- 'Hello there, ask your doubts freely and I will do my best to answer them.'");
+            sendToGPT1("Your task is to return as your response the following sentence exactly word to word :- 'Hello there, ask your doubts freely and I will do my best to answer them.'");
         } catch (JSONException e) {
             throw new RuntimeException(e);
+        }
+
+        try {
+            JSONObject systemMessage = new JSONObject();
+            systemMessage.put("role", "system");
+            systemMessage.put("content", "You are ChatGPT, a language model. Respond concisely and frame responses under 300 tokens.");
+            conversationHistory.add(systemMessage);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +109,11 @@ public class Setting extends AppCompatActivity implements PdfExtractionCallback 
             public void onClick(View v) {
                 String userMessage = messageInput.getText().toString().trim();
                 if (!TextUtils.isEmpty(userMessage)) {
-                    // Add the user's message to the chat
+                    try {
+                        addMessageToHistory("user", userMessage);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
                     inputMessage = userMessage;
                     messageList.add(new gptMessage_Model(userMessage, true));
                     chatAdapter.notifyItemInserted(messageList.size() - 1);
@@ -107,7 +122,7 @@ public class Setting extends AppCompatActivity implements PdfExtractionCallback 
 
                     // Call GPT API to get the response
                     try {
-                        sendToGPT(userMessage);
+                        sendToGPT();
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
@@ -118,6 +133,37 @@ public class Setting extends AppCompatActivity implements PdfExtractionCallback 
         });
     }
 
+    private File createFileFromUri(Uri uri) {
+        File pdfFile = null;
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            String fileName = getFileName(uri);
+            pdfFile = new File(getCacheDir(), fileName);
+            FileOutputStream outputStream = new FileOutputStream(pdfFile);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+            }
+            outputStream.close();
+            inputStream.close();
+        } catch (Exception e) {
+            Log.e("PDF File", "Error creating file from URI", e);
+        }
+        return pdfFile;
+    }
+
+    @SuppressLint("Range")
+    private String getFileName(Uri uri) {
+        String displayName = "document.pdf";
+        try (Cursor cursor = getContentResolver().query(uri, null, null, null, null)) {
+            if (cursor != null && cursor.moveToFirst()) {
+                displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+            }
+        }
+        return displayName;
+    }
+
     private void openFilePicker() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("application/pdf");
@@ -125,8 +171,7 @@ public class Setting extends AppCompatActivity implements PdfExtractionCallback 
         startActivityForResult(intent, PICK_PDF_REQUEST);
     }
 
-    // Function to send the user message to GPT and get the response
-    private void sendToGPT(String userMessage) throws JSONException {
+    private void sendToGPT1(String userMessage) throws JSONException {
         OkHttpClient client = new OkHttpClient();
 
         // Formulate the JSON request body
@@ -183,6 +228,65 @@ public class Setting extends AppCompatActivity implements PdfExtractionCallback 
         });
     }
 
+    @Override
+    public void onPdfTextExtracted(String extractedText) throws JSONException {
+        this.extractedPdfText = extractedText;
+        Toast.makeText(this, "PDF uploaded successfully!", Toast.LENGTH_SHORT).show();
+        addMessageToHistory("user", "Here is the extracted text from the PDF: " + extractedText);
+        sendToGPT();
+    }
+
+    private void addMessageToHistory(String role, String content) throws JSONException {
+        JSONObject message = new JSONObject();
+        message.put("role", role);
+        message.put("content", content);
+        conversationHistory.add(message);
+    }
+
+    private void sendToGPT() throws JSONException {
+        OkHttpClient client = new OkHttpClient();
+
+        // Prepare JSON request body
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("messages", new JSONArray(conversationHistory));
+        jsonObject.put("max_tokens", 500);
+        jsonObject.put("temperature", 0);
+        jsonObject.put("model", "gpt-4");
+
+        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create(jsonObject.toString(), mediaType);
+
+        Request request = new Request.Builder()
+                .url("https://api.openai.com/v1/chat/completions")
+                .addHeader("Authorization", "Bearer " + OPENAI_API_KEY)
+                .addHeader("Content-Type", "application/json")
+                .post(body)
+                .build();
+
+        Log.d("Gpt request", String.valueOf(body));
+
+        // Execute the API call asynchronously
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                try {
+                    String responseBody = Objects.requireNonNull(response.body()).string();
+                    extractResponseContent(responseBody);
+                    Log.d("Gpt response", responseBody);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    // Function to send the user message to GPT and get the response
+
     // Extract the response from the GPT API response
     public void extractResponseContent(String responseBody) {
         try {
@@ -191,10 +295,13 @@ public class Setting extends AppCompatActivity implements PdfExtractionCallback 
             JSONObject firstChoice = choicesArray.getJSONObject(0);
             JSONObject msg = firstChoice.getJSONObject("message");
             String response = msg.getString("content");
-            if (inputMessage.toLowerCase().contains("gpt") || inputMessage.toLowerCase().contains("are you") || inputMessage.toLowerCase().contains("generative pretrained transformer") || response.toLowerCase().contains("gpt") || response.toLowerCase().contains("generative pretrained transformer"))
+            if (inputMessage.toLowerCase().contains("gpt") || inputMessage.toLowerCase().contains("are you") || inputMessage.toLowerCase().contains("generative pretrained transformer") || response.toLowerCase().contains("gpt") || response.toLowerCase().contains("generative pretrained transformer")) {
+                addMessageToHistory("assistant", "I am a fine tuned Large Language Model");
                 updateUIWithResponse("I am a fine tuned Large Language Model");
-            else
+            } else {
+                addMessageToHistory("assistant", response);
                 updateUIWithResponse(msg.getString("content"));
+            }
             Log.d("Info", responseBody);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -212,43 +319,5 @@ public class Setting extends AppCompatActivity implements PdfExtractionCallback 
                 chatRecyclerView.scrollToPosition(messageList.size() - 1);
             }
         });
-    }
-
-    private File createFileFromUri(Uri uri) {
-        File pdfFile = null;
-        try {
-            InputStream inputStream = getContentResolver().openInputStream(uri);
-            String fileName = getFileName(uri);
-            pdfFile = new File(getCacheDir(), fileName);
-            FileOutputStream outputStream = new FileOutputStream(pdfFile);
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = inputStream.read(buffer)) > 0) {
-                outputStream.write(buffer, 0, length);
-            }
-            outputStream.close();
-            inputStream.close();
-        } catch (Exception e) {
-            Log.e("PDF File", "Error creating file from URI", e);
-        }
-        return pdfFile;
-    }
-
-    @SuppressLint("Range")
-    private String getFileName(Uri uri) {
-        String displayName = "document.pdf";
-        try (Cursor cursor = getContentResolver().query(uri, null, null, null, null)) {
-            if (cursor != null && cursor.moveToFirst()) {
-                displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-            }
-        }
-        return displayName;
-    }
-
-    @Override
-    public void onPdfTextExtracted(String extractedText) throws JSONException {
-        this.extractedPdfText = extractedText;
-        Toast.makeText(this, "PDF uploaded successfully!", Toast.LENGTH_SHORT).show();
-        sendToGPT(extractedText);
     }
 }

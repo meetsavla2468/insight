@@ -505,7 +505,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 public void run() {
                     speechRecognizer.startListening(speechRecognizerIntent);
                 }
-            }, list.size() * 1000L + 2000);
+            }, list.size() * 1000L + 4000L);
         }
     }
 

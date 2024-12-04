@@ -43,6 +43,7 @@ public class gptActivity extends AppCompatActivity {
     private ImageButton sendButton;
     private gptAdapter chatAdapter;
     private List<gptMessage_Model> messageList;
+    private List<JSONObject> conversationHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,20 +53,37 @@ public class gptActivity extends AppCompatActivity {
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
         messageInput = findViewById(R.id.messageInput);
         sendButton = findViewById(R.id.sendButton);
-
+        conversationHistory = new ArrayList<>();
         messageList = new ArrayList<>();
         chatAdapter = new gptAdapter(this, messageList);
         chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatRecyclerView.setAdapter(chatAdapter);
 
-        sendToGPT("Your task is to return as your response the following sentence exactly word to word :-Hello! I are here to support your mental wellness. Let's chat about anything on your mind and find some peace together.");
+        try {
+            sendToGPT1("Your task is to return as your response the following sentence exactly word to word :-Hello! I are here to support your mental wellness. Let's chat about anything on your mind and find some peace together.'");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            JSONObject systemMessage = new JSONObject();
+            systemMessage.put("role", "system");
+            systemMessage.put("content", "You are ChatGPT, a language model. Respond concisely and frame responses under 300 tokens.");
+            conversationHistory.add(systemMessage);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String userMessage = messageInput.getText().toString().trim();
                 if (!TextUtils.isEmpty(userMessage)) {
-                    // Add the user's message to the chat
+                    try {
+                        addMessageToHistory("user", userMessage);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
                     inputMessage = userMessage;
                     messageList.add(new gptMessage_Model(userMessage, true));
                     chatAdapter.notifyItemInserted(messageList.size() - 1);
@@ -73,7 +91,11 @@ public class gptActivity extends AppCompatActivity {
                     messageInput.setText("");
 
                     // Call GPT API to get the response
-                    sendToGPT(userMessage);
+                    try {
+                        sendToGPT();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
                 } else {
                     messageInput.setError("Please enter a message.");
                 }
@@ -81,14 +103,32 @@ public class gptActivity extends AppCompatActivity {
         });
     }
 
-    // Function to send the user message to GPT and get the response
-    private void sendToGPT(String userMessage) {
+    private void sendToGPT1(String userMessage) throws JSONException {
         OkHttpClient client = new OkHttpClient();
 
         // Formulate the JSON request body
-        String json = "{\"messages\": [{\"role\": \"system\", \"content\": \"You are ChatGPT, a language model. For the input prompt if frame the response under 300 tokens strictly.\"}, {\"role\": \"user\", \"content\": \"" + userMessage + "\"}], \"max_tokens\": 500, \"temperature\": 0, \"model\": \"gpt-3.5-turbo\"}";
+
+        JSONObject jsonObject = new JSONObject();
+        JSONArray messagesArray = new JSONArray();
+
+        JSONObject systemMessage = new JSONObject();
+        systemMessage.put("role", "system");
+        systemMessage.put("content", "You are ChatGPT, a language model. For the input prompt if frame the response under 300 tokens strictly.");
+        messagesArray.put(systemMessage);
+
+        JSONObject userMessageObj = new JSONObject();
+        userMessageObj.put("role", "user");
+        userMessageObj.put("content", userMessage);  // This will automatically escape special characters
+        messagesArray.put(userMessageObj);
+
+        jsonObject.put("messages", messagesArray);
+        jsonObject.put("max_tokens", 500);
+        jsonObject.put("temperature", 0);
+        jsonObject.put("model", "gpt-3.5-turbo");
+
+        // Formulate the JSON request body
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(json, mediaType);
+        RequestBody body = RequestBody.create(jsonObject.toString(), mediaType);
 
         // Make the POST request to the GPT API
         Request request = new Request.Builder()
@@ -97,6 +137,8 @@ public class gptActivity extends AppCompatActivity {
                 .addHeader("Content-Type", "application/json")
                 .post(body)
                 .build();
+
+        Log.d("Gpt request", String.valueOf(body));
 
         // Execute the API call asynchronously
         client.newCall(request).enqueue(new Callback() {
@@ -110,6 +152,57 @@ public class gptActivity extends AppCompatActivity {
                 try {
                     String responseBody = Objects.requireNonNull(response.body()).string();
                     extractResponseContent(responseBody);
+                    Log.d("Gpt response", responseBody);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    // Function to send the user message to GPT and get the response
+    private void addMessageToHistory(String role, String content) throws JSONException {
+        JSONObject message = new JSONObject();
+        message.put("role", role);
+        message.put("content", content);
+        conversationHistory.add(message);
+    }
+
+    private void sendToGPT() throws JSONException {
+        OkHttpClient client = new OkHttpClient();
+
+        // Prepare JSON request body
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("messages", new JSONArray(conversationHistory));
+        jsonObject.put("max_tokens", 500);
+        jsonObject.put("temperature", 0);
+        jsonObject.put("model", "gpt-4");
+
+        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create(jsonObject.toString(), mediaType);
+
+        Request request = new Request.Builder()
+                .url("https://api.openai.com/v1/chat/completions")
+                .addHeader("Authorization", "Bearer " + OPENAI_API_KEY)
+                .addHeader("Content-Type", "application/json")
+                .post(body)
+                .build();
+
+        Log.d("Gpt request", String.valueOf(body));
+
+        // Execute the API call asynchronously
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                try {
+                    String responseBody = Objects.requireNonNull(response.body()).string();
+                    extractResponseContent(responseBody);
+                    Log.d("Gpt response", responseBody);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -125,10 +218,13 @@ public class gptActivity extends AppCompatActivity {
             JSONObject firstChoice = choicesArray.getJSONObject(0);
             JSONObject msg = firstChoice.getJSONObject("message");
             String response = msg.getString("content");
-            if (inputMessage.toLowerCase().contains("gpt") || inputMessage.toLowerCase().contains("are you") || inputMessage.toLowerCase().contains("generative pretrained transformer") || response.toLowerCase().contains("gpt") || response.toLowerCase().contains("generative pretrained transformer"))
+            if (inputMessage.toLowerCase().contains("gpt") || inputMessage.toLowerCase().contains("are you") || inputMessage.toLowerCase().contains("generative pretrained transformer") || response.toLowerCase().contains("gpt") || response.toLowerCase().contains("generative pretrained transformer")) {
+                addMessageToHistory("assistant", "I am a fine tuned Large Language Model");
                 updateUIWithResponse("I am a fine tuned Large Language Model");
-            else
+            } else {
+                addMessageToHistory("assistant", response);
                 updateUIWithResponse(msg.getString("content"));
+            }
             Log.d("Info", responseBody);
         } catch (JSONException e) {
             e.printStackTrace();
